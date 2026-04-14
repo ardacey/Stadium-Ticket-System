@@ -124,7 +124,7 @@ def cancelticket():
         elif int(cancel_ticket_column) > int(categories[cancel_category][2]):
             output(f"Error: The category '{cancel_category}' has less column than the specified index {b}!")
         elif not category_seats[cancel_category].__contains__(b):
-            output(f"Error: The seat {b} at ’{cancel_category}’ has already been free! Nothing to cancel")
+            output(f"Error: The seat {b} at '{cancel_category}' has already been free! Nothing to cancel")
         else:
             category_seats[cancel_category].remove(b)
             if category_ticket[cancel_category][b] == "student":     
@@ -148,7 +148,7 @@ def showcategory():
     for v in reversed(range(categories[show_category][1])):
         layout_letter = chr(v + 65)
         output_layout(layout_letter+" ")
-        for c in range(categories[show_category][1]):
+        for c in range(categories[show_category][2]):
             layout_ticket = str(layout_letter) + str(c)
             if category_seats[show_category].__contains__(layout_ticket):
                 if category_ticket[show_category][layout_ticket] == "student":
@@ -167,8 +167,8 @@ def showcategory():
             output_layout(" "+str(z))
     output_layout("\n")
 
-for i in data: #I know this is not the best solution for the finding the commands. With readlines() method commands can be reached easily and executed. But i will always using readlines(), i want to try something different for this time.
-    count +=1 #this is just index of the i
+for i in data:
+    count +=1
     if i == "CREATECATEGORY":
         new_category = data[count]
         category_field = data[count+1]
@@ -183,7 +183,7 @@ for i in data: #I know this is not the best solution for the finding the command
         while data[count+j] != "SELLTICKET" and data[count+j] != "CREATECATEGORY" and data[count+j] != "CANCELTICKET" and data[count+j] != "BALANCE" and data[count+j] != "SHOWCATEGORY" and data[count+j] != "end of list":
             j += 1
             if data[count+j].__contains__("-"):
-                seats_range.append(data[count+j])  #I seperated normal seats and ranged seats(like A0-6) because it will be easier to execute inputs when i seperate to 2 lists.
+                seats_range.append(data[count+j])
             else:
                 seats.append(data[count+j])
         seats.pop()   #This is for delete the command at the beginning of the list.
